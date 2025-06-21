@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Minimal SelectDropdown Test</title>
+</head>
+<body>
+    <h1>Minimal Test</h1>
+    
+    <h2>Manual HTML Select (for comparison)</h2>
+    <select>
+        <option value="">Select a role...</option>
+        <option value="admin">Administrator</option>
+        <option value="editor">Content Editor</option>
+        <option value="viewer">Viewer</option>
+    </select>
+    
+    <h2>Custom Component</h2>
+    <select-dropdown id="test"></select-dropdown>
+    
+    <h2>Debug Output</h2>
+    <div id="output"></div>
+
+    <script type="module">
+        // Import just the component
+        import { LitElement, html, css } from 'lit';
+
+        class TestSelectDropdown extends LitElement {
+            static properties = {
+                options: { type: Array }
+            };
+
+            constructor() {
+                super();
+                this.options = [];
+            }
+
+            render() {
+                console.log('Raw options in render:', this.options);
+                
+                // Test 1: Simple string interpolation
+                const testOutput1 = this.options.map(opt => {
+                    if (typeof opt === 'string') {
+                        return `String option: ${opt}`;
+                    } else {
+                        return `Object option: value=${opt.value}, label=${opt.label}`;
+                    }
+                }).join('\n');
+                
+                console.log('Test output 1:', testOutput1);
+                
+                // Test 2: Check what happens in HTML template
+                return html`
+                    <div>
+                        <h3>Component Options Debug</h3>
+                        <p>Options array: ${JSON.stringify(this.options)}</p>
+                        <select>
+                            <option value="">Choose...</option>
+                            ${this.options.map(opt => {
+                                console.log('Processing option:', opt);
+                                if (typeof opt === 'string') {
+                                    console.log('String option:', opt);
+                                    return html`<option value="${opt}">${opt}</option>`;
+                                } else {
+                                    console.log('Object option - value:', opt.value, 'label:', opt.label);
+                                    return html`<option value="${opt.value}">${opt.label}</option>`;
+                                }
+                            })}
+                        </select>
+                        <div>
+                            <h4>Raw mapping test:</h4>
+                            ${this.options.map(opt => html`<div>Option: ${typeof opt === 'string' ? opt : opt.label}</div>`)}
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        customElements.define('test-select-dropdown', TestSelectDropdown);
+
+        // Also import the real component
+        import './src/components/SelectDropdown/SelectDropdown.js';
+
+        // Test after a short delay
+        setTimeout(() => {
+            const testComponent = document.querySelector('#test');
+            const realComponent = document.createElement('test-select-dropdown');
+            
+            // Test with string options
+            testComponent.options = ['Red', 'Green', 'Blue'];
+            realComponent.options = ['Red', 'Green', 'Blue'];
+            
+            console.log('Set string options');
+            
+            // Test with object options after 1 second
+            setTimeout(() => {
+                testComponent.options = [
+                    { value: 'admin', label: 'Administrator' },
+                    { value: 'editor', label: 'Content Editor' }
+                ];
+                realComponent.options = [
+                    { value: 'admin', label: 'Administrator' },
+                    { value: 'editor', label: 'Content Editor' }
+                ];
+                
+                console.log('Set object options');
+                
+                // Add the test component to the page
+                document.body.appendChild(realComponent);
+                
+                // Output debug info
+                const output = document.getElementById('output');
+                output.innerHTML = `
+                    <h3>Debug Info:</h3>
+                    <p>Real component options: ${JSON.stringify(testComponent.options)}</p>
+                    <p>Test component options: ${JSON.stringify(realComponent.options)}</p>
+                `;
+            }, 1000);
+        }, 100);
+    </script>
+</body>
+</html>

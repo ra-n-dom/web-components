@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '../components/DynamicForm.js';
-import '../components/TextInput.js';
-import '../components/SelectDropdown.js';
-import '../components/AppButton.js';
+import './DynamicForm.js';
+import '../TextInput/TextInput.js';
+import '../SelectDropdown/SelectDropdown.js';
+import '../AppButton/AppButton.js';
 
 interface DynamicFormArgs {
   showActions: boolean;

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 
 // Import the component to ensure it's registered
-import '../components/SelectDropdown.js';
+import './SelectDropdown.js';
 
 interface SelectDropdownArgs {
   label: string;
@@ -15,22 +15,32 @@ interface SelectDropdownArgs {
 }
 
 // Function to create the web component template
-const createSelectDropdown = ({ label, value, required, disabled, placeholder, error, options }: SelectDropdownArgs) => html`
-  <select-dropdown
-    label=${label}
-    .value=${value}
-    ?required=${required}
-    ?disabled=${disabled}
-    placeholder=${placeholder}
-    error=${error}
-    .options=${options}
-  ></select-dropdown>
-`;
+const createSelectDropdown = (args: SelectDropdownArgs) => {
+  const { label, value, required, disabled, placeholder, error, options } = args;
+  return html`
+    <select-dropdown
+      label=${label}
+      .value=${value}
+      ?required=${required}
+      ?disabled=${disabled}
+      placeholder=${placeholder}
+      error=${error}
+      .options=${options}
+    ></select-dropdown>
+  `;
+};
 
 const meta = {
   title: 'Components/SelectDropdown',
   tags: ['autodocs'],
-  render: createSelectDropdown,
+  render: (args: SelectDropdownArgs) => createSelectDropdown(args),
+  parameters: {
+    docs: {
+      description: {
+        component: 'A flexible select dropdown component that supports both string and object options. The options control is disabled in Storybook to prevent [object Object] display issues - use the predefined stories to see different option configurations.'
+      }
+    }
+  },
   argTypes: {
     label: {
       control: 'text',
@@ -55,6 +65,13 @@ const meta = {
     error: {
       control: 'text',
       description: 'Error message to display'
+    },
+    options: {
+      control: false,
+      description: 'Array of options - can be strings or objects with value/label properties. Use the predefined stories to see examples.',
+      table: {
+        type: { summary: 'string[] | SelectOption[]' }
+      }
     }
   },
   args: {
@@ -167,5 +184,42 @@ export const FormExample: Story = {
         .options=${['Entry Level', 'Mid Level', 'Senior Level', 'Lead/Principal']}
       ></select-dropdown>
     </form>
+  `
+};
+
+export const DebugOptions: Story = {
+  render: () => html`
+    <div>
+      <h3>Debug: String Options</h3>
+      <select-dropdown
+        label="String Options"
+        placeholder="Select a color"
+        .options=${['Red', 'Green', 'Blue']}
+      ></select-dropdown>
+      
+      <h3>Debug: Object Options</h3>
+      <select-dropdown
+        label="Object Options"
+        placeholder="Select a role"
+        .options=${[
+          { value: 'admin', label: 'Administrator' },
+          { value: 'user', label: 'Regular User' }
+        ]}
+      ></select-dropdown>
+      
+      <h3>Debug: Mixed Options (not recommended)</h3>
+      <select-dropdown
+        label="Mixed Options"
+        placeholder="Select something"
+        .options=${[
+          'Simple String',
+          { value: 'obj', label: 'Object Option' }
+        ]}
+      ></select-dropdown>
+      
+      <div style="margin-top: 1rem; padding: 1rem; background: #f0f0f0;">
+        <strong>If you see [object Object] in any dropdown above, there's an issue with the component's option rendering.</strong>
+      </div>
+    </div>
   `
 };

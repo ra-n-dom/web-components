@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 
 // Import the component to ensure it's registered
-import '../components/AppButton.js';
+import './AppButton.js';
 
 interface AppButtonArgs {
   variant: 'primary' | 'secondary' | 'link';
@@ -20,7 +20,7 @@ const createAppButton = ({ variant, disabled, label }: AppButtonArgs) => html`
 const meta = {
   title: 'Components/AppButton',
   tags: ['autodocs'],
-  render: createAppButton,
+  render: (args: AppButtonArgs) => createAppButton(args),
   argTypes: {
     variant: {
       control: { type: 'select' },

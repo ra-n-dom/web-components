@@ -1,21 +1,24 @@
-import type { Preview } from '@storybook/web-components-vite'
+import type { Preview } from '@storybook/web-components-vite';
 
 const preview: Preview = {
   parameters: {
     controls: {
       matchers: {
-       color: /(background|color)$/i,
-       date: /Date$/i,
+        color: /(background|color)$/i,
+        date: /Date$/i,
       },
     },
-
     a11y: {
-      // 'todo' - show a11y violations in the test UI only
-      // 'error' - fail CI on a11y violations
-      // 'off' - skip a11y checks entirely
+      // Show a11y violations in the test UI
       test: 'todo'
+    },
+    docs: {
+      toc: true, // Enable table of contents in docs
+    },
+    viewport: {
+      defaultViewport: 'responsive',
     }
-  },
+  }
 };
 
 export default preview;

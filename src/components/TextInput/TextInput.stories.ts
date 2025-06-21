@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 
 // Import the component to ensure it's registered
-import '../components/TextInput.js';
+import './TextInput.js';
 
 interface TextInputArgs {
   label: string;
@@ -30,7 +30,7 @@ const createTextInput = ({ label, value, required, type, placeholder, disabled, 
 const meta = {
   title: 'Components/TextInput',
   tags: ['autodocs'],
-  render: createTextInput,
+  render: (args: TextInputArgs) => createTextInput(args),
   argTypes: {
     label: {
       control: 'text',

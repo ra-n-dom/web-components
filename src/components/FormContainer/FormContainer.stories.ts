@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '../components/FormContainer.js';
-import '../components/DynamicForm.js';
-import '../components/TextInput.js';
-import '../components/SelectDropdown.js';
+import './FormContainer.js';
+import '../DynamicForm/DynamicForm.js';
+import '../TextInput/TextInput.js';
+import '../SelectDropdown/SelectDropdown.js';
 
 interface FormContainerArgs {
   title: string;

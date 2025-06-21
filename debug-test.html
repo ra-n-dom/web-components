@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug SelectDropdown</title>
+</head>
+<body>
+    <h1>Debug Test for SelectDropdown</h1>
+    
+    <h2>Test 1: String Options</h2>
+    <select-dropdown
+        id="test1"
+        label="String Options Test"
+        placeholder="Select a color"
+    ></select-dropdown>
+    
+    <h2>Test 2: Object Options</h2>
+    <select-dropdown
+        id="test2"
+        label="Object Options Test" 
+        placeholder="Select a role"
+    ></select-dropdown>
+
+    <h2>Test 3: Direct HTML for comparison</h2>
+    <select>
+        <option value="">Select a role...</option>
+        <option value="admin">Administrator</option>
+        <option value="editor">Content Editor</option>
+        <option value="viewer">Viewer</option>
+    </select>
+
+    <script type="module">
+        // Import the component
+        import './src/components/SelectDropdown/SelectDropdown.js';
+        
+        // Test 1: String options
+        const test1 = document.getElementById('test1');
+        test1.options = ['Red', 'Green', 'Blue', 'Yellow'];
+        
+        // Test 2: Object options
+        const test2 = document.getElementById('test2');
+        test2.options = [
+            { value: 'admin', label: 'Administrator' },
+            { value: 'editor', label: 'Content Editor' }, 
+            { value: 'viewer', label: 'Viewer' },
+            { value: 'guest', label: 'Guest User', disabled: true }
+        ];
+        
+        // Log the options to see what they look like
+        console.log('Test 1 options:', test1.options);
+        console.log('Test 2 options:', test2.options);
+        
+        // Add event listeners
+        test1.addEventListener('select-change', (e) => {
+            console.log('Test 1 changed:', e.detail);
+        });
+        
+        test2.addEventListener('select-change', (e) => {
+            console.log('Test 2 changed:', e.detail);
+        });
+    </script>
+</body>
+</html>

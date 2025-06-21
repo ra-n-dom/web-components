@@ -88,11 +88,27 @@ export class SelectDropdown extends LitElement {
   }
 
   private _normalizeOptions(): SelectOption[] {
-    return this.options.map(opt => {
+    if (!Array.isArray(this.options)) {
+      console.error('Options is not an array:', this.options);
+      return [];
+    }
+    
+    return this.options.map((opt, index) => {
       if (typeof opt === 'string') {
-        return { value: opt, label: opt };
+        return { value: opt, label: opt, disabled: false };
+      } else if (opt && typeof opt === 'object') {
+        // Handle object options
+        const value = opt.value !== undefined ? String(opt.value) : `option-${index}`;
+        const label = opt.label !== undefined ? String(opt.label) : value;
+        const disabled = Boolean(opt.disabled);
+        
+        return { value, label, disabled };
+      } else {
+        // Handle unexpected types
+        console.warn('Unexpected option type:', typeof opt, opt);
+        const fallback = String(opt);
+        return { value: fallback, label: fallback, disabled: false };
       }
-      return opt;
     });
   }
 
@@ -127,14 +143,21 @@ export class SelectDropdown extends LitElement {
               ${this.placeholder}
             </option>
           ` : ''}
-          ${normalizedOptions.map(option => html`
-            <option 
-              .value=${option.value}
-              ?disabled=${option.disabled}
-            >
-              ${option.label}
-            </option>
-          `)}
+          ${normalizedOptions.map(option => {
+            // Ensure we have strings
+            const optionValue = String(option.value);
+            const optionLabel = String(option.label);
+            const isDisabled = Boolean(option.disabled);
+            
+            return html`
+              <option 
+                value=${optionValue}
+                ?disabled=${isDisabled}
+              >
+                ${optionLabel}
+              </option>
+            `;
+          })}
         </select>
         ${this.error ? html`<div class="error">${this.error}</div>` : ''}
       </div>

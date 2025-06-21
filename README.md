@@ -1,10 +1,71 @@
-# Web Components Project
+# Form Web Components
 
-A collection of reusable form web components built with [Lit](https://lit.dev/) and showcased with [Storybook](https://storybook.js.org/).
+A modern collection of reusable form web components built with [Lit](https://lit.dev/) and showcased with [Storybook](https://storybook.js.org/).
 
-## Components
+## 🚀 Quick Start
 
-This project includes the following web components:
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Start Storybook (recommended for component development)
+npm run storybook
+
+# Build for production
+npm run build
+
+# Build Storybook for deployment
+npm run build-storybook
+
+# Preview production build
+npm run preview
+```
+
+## 🛠️ Development
+
+### Prerequisites
+- Node.js (v18 or higher)
+- npm or pnpm
+
+### Available Scripts
+
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Start Vite development server (http://localhost:5173) |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview production build |
+| `npm run storybook` | Start Storybook development server (http://localhost:6006) |
+| `npm run build-storybook` | Build Storybook for deployment |
+
+### Project Structure
+
+```
+src/
+├── components/                    # Web components (co-located with stories)
+│   ├── AppButton/
+│   │   ├── AppButton.ts          # Component implementation
+│   │   ├── AppButton.stories.ts  # Storybook stories
+│   │   └── index.ts              # Component export
+│   ├── TextInput/
+│   │   ├── TextInput.ts
+│   │   ├── TextInput.stories.ts
+│   │   └── index.ts
+│   ├── SelectDropdown/
+│   ├── DynamicForm/
+│   ├── FormContainer/
+│   ├── CompleteDemo.stories.ts   # Full examples
+│   └── index.ts                  # Main component exports
+├── main.ts                       # Demo application entry
+├── style.css                     # Global styles
+└── vite-env.d.ts                # TypeScript environment
+```
+
+## 📦 Components
+
+This project includes 5 production-ready form components:
 
 ### 🔘 AppButton (`<app-button>`)
 A versatile button component with multiple visual variants.
@@ -121,89 +182,43 @@ A container component that provides consistent styling and layout for forms.
 </form-container>
 ```
 
-## Development
+## ✨ Features
 
-### Prerequisites
-- Node.js (v18 or higher)
-- pnpm (or npm)
+- 🎨 **Modern Design System** - Consistent styling and theming
+- ♿ **Accessibility First** - ARIA support and keyboard navigation
+- 📱 **Responsive** - Works on desktop, tablet, and mobile
+- 🔧 **TypeScript** - Full type safety and IntelliSense
+- 📖 **Storybook Integration** - Interactive documentation and testing
+- ⚡ **Performance** - Optimized with Lit's efficient rendering
+- 🧪 **Testing Ready** - Prepared for unit and integration tests
+- 🎯 **Path Aliases** - Clean imports with `@/components`
 
-### Getting Started
-
-1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-2. **Start development server:**
-   ```bash
-   npm run dev
-   ```
-
-3. **Start Storybook:**
-   ```bash
-   npm run storybook
-   ```
-
-4. **Build for production:**
-   ```bash
-   npm run build
-   ```
-
-### Available Scripts
-
-- `npm run dev` - Start Vite development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run storybook` - Start Storybook development server
-- `npm run build-storybook` - Build Storybook for production
-
-## Project Structure
-
-```
-src/
-├── components/           # Web components
-│   ├── AppButton.ts
-│   ├── TextInput.ts
-│   ├── SelectDropdown.ts
-│   ├── DynamicForm.ts
-│   ├── FormContainer.ts
-│   └── index.ts         # Component exports
-├── stories/             # Storybook stories
-│   ├── AppButton.stories.ts
-│   ├── TextInput.stories.ts
-│   ├── SelectDropdown.stories.ts
-│   ├── DynamicForm.stories.ts
-│   ├── FormContainer.stories.ts
-│   └── CompleteDemo.stories.ts
-└── main.ts             # Main application entry
-```
-
-## Features
-
-- ✅ Built with modern Lit web components
-- ✅ TypeScript support
-- ✅ Comprehensive Storybook documentation
-- ✅ Accessible form components
-- ✅ Event-driven architecture
-- ✅ Customizable styling
-- ✅ Responsive design
-- ✅ Production-ready build
-
-## Browser Support
+## 🌐 Browser Support
 
 These components work in all modern browsers that support:
-- Custom Elements v1
-- Shadow DOM v1
-- ES2017+
+- **Custom Elements v1**
+- **Shadow DOM v1** 
+- **ES2017+**
 
-## Contributing
+Supported browsers:
+- Chrome 54+
+- Firefox 63+
+- Safari 10.1+
+- Edge 79+
+
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
+2. Create a feature branch: `git checkout -b feature/amazing-component`
 3. Make your changes
-4. Add/update tests and stories
-5. Submit a pull request
+4. Add/update tests and Storybook stories
+5. Ensure accessibility compliance
+6. Submit a pull request
 
-## License
+## 📄 License
 
-MIT License - see LICENSE file for details
+MIT License - see [LICENSE](LICENSE) file for details.
+
+---
+
+**Built with ❤️ using [Lit](https://lit.dev/) and [Storybook](https://storybook.js.org/)**
