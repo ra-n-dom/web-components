@@ -3,12 +3,11 @@ import './components/index.js'
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
-    <h1>Web Components Demo</h1>
-    <p>This project contains form web components built with Lit. View the components in Storybook for interactive examples.</p>
+    <h1>Form Web Components</h1>
+    <p>A collection of reusable form components built with Lit. View the components in Storybook for interactive examples.</p>
     
     <div style="margin: 2rem 0;">
-      <h2>Quick Demo</h2>
-      <form-container title="Sample Form" description="A quick example of the form components">
+      <form-container title="Demo Form" description="A quick example of the form components working together">
         <dynamic-form>
           <text-input
             label="Your Name"
@@ -28,11 +27,6 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
             required
             placeholder="Choose your department"
           ></select-dropdown>
-          
-          <div style="margin-top: 1rem;">
-            <app-button variant="primary">Submit Form</app-button>
-            <app-button variant="secondary">Cancel</app-button>
-          </div>
         </dynamic-form>
       </form-container>
     </div>
@@ -46,7 +40,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         <li><strong>dynamic-form</strong> - Form container with submission handling</li>
         <li><strong>form-container</strong> - Layout container for forms</li>
       </ul>
-      <p><strong>Run Storybook to see interactive examples:</strong> <code>npm run storybook</code></p>
+      <p><strong>View in Storybook:</strong> <code>npm run storybook</code></p>
     </div>
   </div>
 `
