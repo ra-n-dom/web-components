@@ -1,24 +1,67 @@
 import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import './components/index.js'
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
+    <h1>Web Components Demo</h1>
+    <p>This project contains form web components built with Lit. View the components in Storybook for interactive examples.</p>
+    
+    <div style="margin: 2rem 0;">
+      <h2>Quick Demo</h2>
+      <form-container title="Sample Form" description="A quick example of the form components">
+        <dynamic-form>
+          <text-input
+            label="Your Name"
+            required
+            placeholder="Enter your full name"
+          ></text-input>
+          
+          <text-input
+            label="Email"
+            type="email"
+            required
+            placeholder="you@example.com"
+          ></text-input>
+          
+          <select-dropdown
+            label="Department"
+            required
+            placeholder="Choose your department"
+          ></select-dropdown>
+          
+          <div style="margin-top: 1rem;">
+            <app-button variant="primary">Submit Form</app-button>
+            <app-button variant="secondary">Cancel</app-button>
+          </div>
+        </dynamic-form>
+      </form-container>
     </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
+    
+    <div style="margin-top: 2rem; padding: 1rem; background: #f5f5f5; border-radius: 8px;">
+      <h3>Available Components:</h3>
+      <ul>
+        <li><strong>app-button</strong> - Versatile button with multiple variants</li>
+        <li><strong>text-input</strong> - Text input with labels and validation</li>
+        <li><strong>select-dropdown</strong> - Customizable select dropdown</li>
+        <li><strong>dynamic-form</strong> - Form container with submission handling</li>
+        <li><strong>form-container</strong> - Layout container for forms</li>
+      </ul>
+      <p><strong>Run Storybook to see interactive examples:</strong> <code>npm run storybook</code></p>
+    </div>
   </div>
 `
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+// Set up the demo form
+const selectDropdown = document.querySelector('select-dropdown');
+if (selectDropdown) {
+  (selectDropdown as any).options = ['Engineering', 'Marketing', 'Sales', 'Support', 'HR'];
+}
+
+// Add event listeners for demo
+const dynamicForm = document.querySelector('dynamic-form');
+if (dynamicForm) {
+  dynamicForm.addEventListener('form-submit', (e: any) => {
+    console.log('Demo form submitted:', e.detail.data);
+    alert('Form submitted successfully! Check the console for data.');
+  });
+}
